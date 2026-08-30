@@ -5,7 +5,8 @@
 
 Анімована картка для Home Assistant для відображення стану **пральної** та **посудомийної** машин із підтримкою **візуального редактора UI**.
 
-![Appliance Card Preview](preview.svg)
+![Appliance Card Preview](preview.png)
+![Appliance Card Config](config.png)
 
 ## 🚀 Особливості
 

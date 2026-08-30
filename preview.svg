@@ -1,0 +1,141 @@
+<svg xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" viewBox="0 0 760 520" width="760" height="520">
+  <defs>
+    <linearGradient id="card-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#edf3fb"/>
+      <stop offset="55%" stop-color="#e4edf8"/>
+      <stop offset="100%" stop-color="#dfe9f6"/>
+    </linearGradient>
+    <linearGradient id="bar-grad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2f80ed"/>
+      <stop offset="100%" stop-color="#56a8ff"/>
+    </linearGradient>
+    <linearGradient id="dw-door-preview" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2c3e50"/>
+      <stop offset="100%" stop-color="#1a252f"/>
+    </linearGradient>
+    <radialGradient id="wm-glass" cx=".4" cy=".35" r=".85">
+      <stop offset="0%" stop-color="#2c3645"/>
+      <stop offset="60%" stop-color="#141923"/>
+      <stop offset="100%" stop-color="#090c12"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="760" height="520" fill="#0f172a" rx="16"/>
+
+  <!-- ================= CARD 1: WASHING MACHINE (RUNNING) ================= -->
+  <g transform="translate(20, 20)">
+    <rect width="350" height="480" rx="24" fill="url(#card-bg)"/>
+    <rect width="350" height="5" rx="2" fill="url(#bar-grad)"/>
+
+    <!-- Header -->
+    <rect x="16" y="18" width="44" height="44" rx="14" fill="#ffffff"/>
+    <circle cx="38" cy="40" r="10" fill="none" stroke="#2f80ed" stroke-width="3"/>
+    <text x="70" y="44" font-family="sans-serif" font-size="17" font-weight="bold" fill="#1c2733">Пральна машина</text>
+    
+    <!-- Active Badge -->
+    <rect x="250" y="27" width="85" height="26" rx="13" fill="#d9f2e2"/>
+    <circle cx="264" cy="40" r="3.5" fill="#22b263"/>
+    <text x="274" y="44" font-family="sans-serif" font-size="9" font-weight="bold" fill="#1c9a55">ПРАЦЮЄ</text>
+
+    <!-- Appliance SVG (Active) -->
+    <g transform="translate(65, 75)">
+      <rect x="30" y="8" width="160" height="204" rx="14" fill="#ffffff" stroke="#d0d6de" stroke-width="1.5"/>
+      <path d="M 30 22 L 30 50 L 190 50 L 190 22 C 190 14 176 8 176 8 L 44 8 C 44 8 30 14 30 22 Z" fill="#111317"/>
+      
+      <!-- Display showing 42 min -->
+      <rect x="142" y="18" width="40" height="20" rx="4" fill="#05070a"/>
+      <text x="162" y="32" font-family="monospace" font-size="10" font-weight="bold" fill="#e2f1ff" text-anchor="middle">42 хв</text>
+
+      <!-- Washing Drum active -->
+      <circle cx="110" cy="136" r="56" fill="#14171d"/>
+      <circle cx="110" cy="136" r="46" fill="#202530"/>
+      <circle cx="110" cy="136" r="39" fill="url(#wm-glass)"/>
+      <circle cx="100" cy="132" r="13" fill="#ea4335"/>
+      <circle cx="119" cy="139" r="12" fill="#4285f4"/>
+      <circle cx="110" cy="123" r="10" fill="#fbbc05"/>
+
+      <!-- Spinning Motion Arcs -->
+      <circle cx="110" cy="136" r="49" fill="none" stroke="#2f80ed" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="90 60" opacity="0.9"/>
+    </g>
+
+    <!-- Main Panel -->
+    <rect x="16" y="300" width="318" height="90" rx="18" fill="rgba(255,255,255,0.72)"/>
+    
+    <!-- Active Power Badge -->
+    <rect x="228" y="312" width="90" height="24" rx="8" fill="rgba(47,128,237,0.08)" stroke="rgba(47,128,237,0.15)"/>
+    <text x="273" y="328" font-family="sans-serif" font-size="12" font-weight="800" fill="#2f80ed" text-anchor="middle">⚡ 1850 Вт</text>
+
+    <!-- Ring Box (Progress 65%) -->
+    <circle cx="68" cy="345" r="34" fill="none" stroke="#dde5ee" stroke-width="7"/>
+    <circle cx="68" cy="345" r="34" fill="none" stroke="#2f80ed" stroke-width="7" stroke-dasharray="213" stroke-dashoffset="74" stroke-linecap="round" transform="rotate(-90 68 345)"/>
+    <text x="68" y="344" font-family="sans-serif" font-size="13" font-weight="800" fill="#1c2733" text-anchor="middle">42 хв</text>
+    <text x="68" y="356" font-family="sans-serif" font-size="7.5" font-weight="bold" fill="#8a95a3" text-anchor="middle">ЗАЛИШИЛОСЬ</text>
+
+    <!-- Program & Phase Texts -->
+    <text x="120" y="338" font-family="sans-serif" font-size="15" font-weight="800" fill="#1c2733">Бавовна 60°C</text>
+    <text x="120" y="356" font-family="sans-serif" font-size="12" font-weight="600" fill="#506173">Основне прання</text>
+    
+    <!-- Progress Bar (65%) -->
+    <rect x="120" y="366" width="195" height="8" rx="4" fill="#e2e9f1"/>
+    <rect x="120" y="366" width="126" height="8" rx="4" fill="url(#bar-grad)"/>
+
+    <!-- Bottom Info Cards -->
+    <rect x="16" y="400" width="154" height="60" rx="14" fill="rgba(255,255,255,0.72)"/>
+    <text x="28" y="418" font-family="sans-serif" font-size="9" font-weight="bold" fill="#8a95a3">ПРОГРАМА</text>
+    <text x="28" y="438" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1c2733">Бавовна 60°C</text>
+
+    <rect x="180" y="400" width="154" height="60" rx="14" fill="rgba(255,255,255,0.72)"/>
+    <text x="192" y="418" font-family="sans-serif" font-size="9" font-weight="bold" fill="#8a95a3">ФАЗА</text>
+    <text x="192" y="438" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1c2733">Основне прання</text>
+  </g>
+
+  <!-- ================= CARD 2: DISHWASHER (IDLE/OFF) ================= -->
+  <g transform="translate(390, 20)">
+    <rect width="350" height="480" rx="24" fill="url(#card-bg)"/>
+    <rect width="350" height="5" rx="2" fill="url(#bar-grad)"/>
+
+    <!-- Header -->
+    <rect x="16" y="18" width="44" height="44" rx="14" fill="#ffffff"/>
+    <rect x="30" y="30" width="16" height="20" rx="2" fill="none" stroke="#2f80ed" stroke-width="2.5"/>
+    <text x="70" y="44" font-family="sans-serif" font-size="17" font-weight="bold" fill="#1c2733">Посудомийна...</text>
+    
+    <!-- Idle Badge -->
+    <rect x="235" y="27" width="100" height="26" rx="13" fill="#e3e8ee"/>
+    <circle cx="247" cy="40" r="3.5" fill="#9aa5b1"/>
+    <text x="256" y="44" font-family="sans-serif" font-size="9" font-weight="bold" fill="#6b7684">ГОТОВО / ВИМКНЕНО</text>
+
+    <!-- Appliance SVG (Idle) -->
+    <g transform="translate(65, 75)">
+      <rect x="30" y="8" width="160" height="204" rx="18" fill="#ffffff" stroke="#c7cfda" stroke-width="1.4"/>
+      <rect x="38" y="18" width="144" height="28" rx="6" fill="#1e2c4d"/>
+      <text x="110" y="36" font-family="monospace" font-size="12" font-weight="bold" fill="#22b263" text-anchor="middle">--:--</text>
+      <rect x="42" y="54" width="136" height="146" rx="12" fill="url(#dw-door-preview)"/>
+      <path d="M 70 120 Q 110 80 150 120" fill="none" stroke="#56a8ff" stroke-width="3" stroke-dasharray="6 4" opacity="0.4"/>
+    </g>
+
+    <!-- Main Panel -->
+    <rect x="16" y="300" width="318" height="90" rx="18" fill="rgba(255,255,255,0.72)"/>
+    <rect x="238" y="312" width="80" height="24" rx="8" fill="rgba(47,128,237,0.08)" stroke="rgba(47,128,237,0.15)"/>
+    <text x="278" y="328" font-family="sans-serif" font-size="12" font-weight="bold" fill="#2f80ed" text-anchor="middle">⚡ 0 Вт</text>
+
+    <!-- Ring Box (Empty) -->
+    <circle cx="68" cy="345" r="34" fill="none" stroke="#dde5ee" stroke-width="7"/>
+    <text x="68" y="347" font-family="sans-serif" font-size="13" font-weight="800" fill="#1c2733" text-anchor="middle">0 хв</text>
+    <text x="68" y="358" font-family="sans-serif" font-size="8" font-weight="bold" fill="#8a95a3" text-anchor="middle">ГОТОВО</text>
+
+    <!-- Empty Program & Phase -->
+    <text x="120" y="338" font-family="sans-serif" font-size="15" font-weight="800" fill="#1c2733">---</text>
+    <text x="120" y="356" font-family="sans-serif" font-size="12" font-weight="600" fill="#506173">---</text>
+    <rect x="120" y="366" width="195" height="8" rx="4" fill="#e2e9f1"/>
+
+    <!-- Bottom Info Cards -->
+    <rect x="16" y="400" width="154" height="60" rx="14" fill="rgba(255,255,255,0.72)"/>
+    <text x="28" y="418" font-family="sans-serif" font-size="9" font-weight="bold" fill="#8a95a3">ПРОГРАМА</text>
+    <text x="28" y="438" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1c2733">---</text>
+
+    <rect x="180" y="400" width="154" height="60" rx="14" fill="rgba(255,255,255,0.72)"/>
+    <text x="192" y="418" font-family="sans-serif" font-size="9" font-weight="bold" fill="#8a95a3">ФАЗА</text>
+    <text x="192" y="438" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1c2733">---</text>
+  </g>
+</svg>

@@ -61,6 +61,7 @@ power_entity: sensor.washing_machine_power
 | `power_entity` | `string` | Ні | Сенсор споживання потужності (Вт) |
 
 ---
+Оригінальна ідея взатя тут: https://github.com/sionetta/wm_animated_ha_card
 
 ## 📄 Ліцензія
 

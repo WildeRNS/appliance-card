@@ -26,7 +26,7 @@
 
 1. Відкрийте **HACS** ➔ **Frontend**.
 2. Натисніть три крапки у правому верхньому кутку ➔ **Custom repositories**.
-3. Додайте посилання: `[https://github.com/WildeRNS/appliance-card](https://github.com/WildeRNS/appliance-card)`.
+3. Додайте посилання: `(https://github.com/WildeRNS/appliance-card)`.
 4. Оберіть тип **Lovelace**.
 5. Натисніть **Завантажити** (Download) та оновіть сторінку.
 

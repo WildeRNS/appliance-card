@@ -309,7 +309,7 @@ class ApplianceCard extends HTMLElement {
           display: block;
         }
 
-        /* За замовчуванням — СВІТЛА ТЕМА */
+        /* СВІТЛА ТЕМА */
         .wrap {
           --card-bg: #f0f4f9;
           --text-primary: #1e293b;
@@ -339,34 +339,34 @@ class ApplianceCard extends HTMLElement {
           --shadow-effect: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.08));
         }
 
-        /* ТЕМНА ТЕМА */
+        /* ТЕМНА ТЕМА (ОНОВЛЕНИЙ КОНТРАСТ) */
         .wrap.dark {
-          --card-bg: linear-gradient(180deg, #1e2638 0%, #141b29 100%);
+          --card-bg: linear-gradient(180deg, #2b364a 0%, #1e2636 100%);
           --text-primary: #f8fafc;
           --text-secondary: #94a3b8;
           --text-muted: #64748b;
-          --icon-bg: #28334a;
+          --icon-bg: #36445e;
           --icon-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-          --btn-bg: rgba(255, 255, 255, 0.08);
-          --btn-border: rgba(255, 255, 255, 0.12);
+          --btn-bg: rgba(255, 255, 255, 0.1);
+          --btn-border: rgba(255, 255, 255, 0.15);
           --btn-color: #cbd5e1;
-          --badge-idle-bg: rgba(255, 255, 255, 0.1);
+          --badge-idle-bg: rgba(255, 255, 255, 0.12);
           --badge-idle-text: #cbd5e1;
           --badge-idle-dot: #64748b;
-          --badge-run-bg: rgba(34, 197, 94, 0.2);
+          --badge-run-bg: rgba(34, 197, 94, 0.25);
           --badge-run-text: #4ade80;
-          --panel-bg: rgba(15, 23, 42, 0.65);
-          --panel-border: rgba(255, 255, 255, 0.1);
+          --panel-bg: rgba(13, 18, 28, 0.65);
+          --panel-border: rgba(255, 255, 255, 0.12);
           --panel-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
-          --ring-track: rgba(255, 255, 255, 0.1);
+          --ring-track: rgba(255, 255, 255, 0.12);
           --ring-arc: #38bdf8;
-          --bar-bg: rgba(255, 255, 255, 0.1);
-          --power-bg: rgba(56, 189, 248, 0.15);
-          --power-border: rgba(56, 189, 248, 0.3);
+          --bar-bg: rgba(255, 255, 255, 0.12);
+          --power-bg: rgba(56, 189, 248, 0.18);
+          --power-border: rgba(56, 189, 248, 0.35);
           --power-color: #38bdf8;
           --accent-blue: #38bdf8;
-          --card-border: 1px solid rgba(255, 255, 255, 0.08);
-          --shadow-effect: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.4));
+          --card-border: 1px solid rgba(255, 255, 255, 0.14);
+          --shadow-effect: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.45));
         }
 
         ha-card {
@@ -378,7 +378,7 @@ class ApplianceCard extends HTMLElement {
           background: var(--card-bg);
           color: var(--text-primary);
           font-family: var(--paper-font-body1_-_font-family, inherit);
-          box-shadow: var(--ha-card-box-shadow, 0 6px 20px rgba(0, 0, 0, .08));
+          box-shadow: var(--ha-card-box-shadow, 0 6px 20px rgba(0, 0, 0, .12));
           border: var(--card-border);
           transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
@@ -405,7 +405,7 @@ class ApplianceCard extends HTMLElement {
           font-size: 11px; font-weight: 700; letter-spacing: .7px;
           padding: 6px 11px; border-radius: 999px;
           background: var(--badge-idle-bg); color: var(--badge-idle-text); white-space: nowrap;
-          border: 1px solid rgba(0, 0, 0, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.05);
           transition: background 0.3s ease, color 0.3s ease;
         }
         .badge .b-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--badge-idle-dot); }
@@ -556,21 +556,18 @@ class ApplianceCard extends HTMLElement {
   }
 
   _isDarkMode() {
-    // 1. Пряма перевірка HA theme
     if (this._hass?.themes?.darkMode === true) return true;
     if (this._hass?.themes?.darkMode === false) return false;
 
-    // 2. Перевірка фону документа (якщо світлий інтерфейс - повертає false)
     const bg = getComputedStyle(document.body).backgroundColor;
     if (bg) {
       const rgb = bg.match(/\d+/g);
       if (rgb && rgb.length >= 3) {
         const brightness = (parseInt(rgb[0]) * 299 + parseInt(rgb[1]) * 587 + parseInt(rgb[2]) * 114) / 1000;
-        if (brightness > 150) return false; // Явно світлий фон
+        if (brightness > 150) return false;
       }
     }
 
-    // 3. Системний режим OS
     return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
   }
 
@@ -583,7 +580,6 @@ class ApplianceCard extends HTMLElement {
     const wrap = root.getElementById("wrap");
     if (!wrap) return;
 
-    // Автоматичне виявлення теми
     const isDark = this._isDarkMode();
     wrap.classList.toggle("dark", isDark);
 
@@ -610,7 +606,6 @@ class ApplianceCard extends HTMLElement {
     const status = this._st(c.status_entity);
     const noData = !status || ["unknown", "unavailable"].includes(status.state);
     
-    // Фаза у верхньому баджі
     const rawPhase = c.phase_entity ? this._st(c.phase_entity)?.state : null;
     const phaseVal = (rawPhase && !["off", "unavailable", "unknown", "none", "idle", "null", ""].includes(String(rawPhase).toLowerCase())) 
       ? String(rawPhase).trim() 
@@ -627,7 +622,6 @@ class ApplianceCard extends HTMLElement {
       }
     }
 
-    // Залишок часу
     const remState = c.remaining_entity ? this._st(c.remaining_entity)?.state : null;
     const remFmt = running ? this._fmtTimeRemaining(remState) : "---";
 
@@ -640,12 +634,10 @@ class ApplianceCard extends HTMLElement {
     const ringLabelEl = root.getElementById("ringLabel");
     if (ringLabelEl) ringLabelEl.textContent = running ? t.ring_running : t.ring_idle;
 
-    // Потужність
     const powerRaw = c.power_entity ? this._st(c.power_entity)?.state : null;
     const powerValEl = root.getElementById("powerVal");
     if (powerValEl) powerValEl.textContent = this._fmtPower(powerRaw);
 
-    // Прогрес
     const progRaw = c.progress_entity ? this._st(c.progress_entity)?.state : null;
     const progNum = parseFloat(progRaw);
     let progress = isNaN(progNum) ? 0 : Math.min(100, Math.max(0, progNum));
@@ -661,12 +653,10 @@ class ApplianceCard extends HTMLElement {
     const barFillEl = root.getElementById("barFill");
     if (barFillEl) barFillEl.style.width = running ? `${progress}%` : "0%";
 
-    // Назва програми
     const programText = this._getCleanVal(c.program_entity, running);
     const stProgramEl = root.getElementById("stProgram");
     if (stProgramEl) stProgramEl.textContent = programText;
 
-    // Час роботи (elapsed_time)
     const defaultElapsedEntity = isDw ? "sensor.dishwasher_elapsed_time" : "sensor.washing_machine_elapsed_time";
     const elapsedEntityId = c.elapsed_entity || defaultElapsedEntity;
     const elapsedSec = this._st(elapsedEntityId)?.state;

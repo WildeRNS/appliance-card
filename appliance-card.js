@@ -319,10 +319,9 @@ class ApplianceCard extends HTMLElement {
           display: block;
         }
 
-        /* ОСНОВНА ОБОРУТКА КАРТКИ */
         .wrap {
           /* СВІТЛА ТЕМА */
-          --card-bg: var(--ha-card-background, var(--card-background-color, #ffffff));
+          --card-bg: #ffffff;
           --text-primary: #1e293b;
           --text-secondary: #475569;
           --text-muted: #64748b;
@@ -361,9 +360,9 @@ class ApplianceCard extends HTMLElement {
           font-family: var(--paper-font-body1_-_font-family, inherit);
         }
 
-        /* ТЕМНА ТЕМА (ВІДПОВІДАЄ ТОЧНОМУ ФОНУ КАРТОК HOME ASSISTANT) */
+        /* ТЕМНА ТЕМА: ТОЧНИЙ ВУГІЛЬНИЙ КОЛІР ЯК У НИЖНІХ БЛОКАХ */
         .wrap.dark {
-          --card-bg: var(--ha-card-background, var(--card-background-color, #1e232e));
+          --card-bg: #1c1e24;
           --text-primary: #f8fafc;
           --text-secondary: #cbd5e1;
           --text-muted: #94a3b8;
@@ -372,13 +371,13 @@ class ApplianceCard extends HTMLElement {
           --btn-bg: rgba(255, 255, 255, 0.08);
           --btn-border: rgba(255, 255, 255, 0.12);
           --btn-color: #f1f5f9;
-          --badge-idle-bg: rgba(255, 255, 255, 0.1);
+          --badge-idle-bg: rgba(255, 255, 255, 0.08);
           --badge-idle-text: #cbd5e1;
           --badge-idle-dot: #94a3b8;
           --badge-run-bg: rgba(34, 197, 94, 0.25);
           --badge-run-text: #4ade80;
-          --panel-bg: rgba(0, 0, 0, 0.22);
-          --panel-border: rgba(255, 255, 255, 0.08);
+          --panel-bg: rgba(0, 0, 0, 0.25);
+          --panel-border: rgba(255, 255, 255, 0.06);
           --panel-shadow: none;
           --ring-track: rgba(255, 255, 255, 0.1);
           --ring-arc: #38bdf8;

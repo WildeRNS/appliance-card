@@ -230,22 +230,22 @@ class ApplianceCard extends HTMLElement {
               <stop offset="1" stop-color="#1a252f"/>
             </linearGradient>
           </defs>
-          <ellipse cx="110" cy="222" rx="76" ry="8" fill="#20304a" opacity=".16"/>
+          <ellipse cx="110" cy="222" rx="76" ry="8" fill="#000000" opacity=".3"/>
           <rect x="30" y="8" width="160" height="204" rx="18" fill="url(#dw-body)"/>
-          <rect x="30" y="8" width="160" height="204" rx="18" fill="none" stroke="#c7cfda" stroke-width="1.4"/>
-          <rect x="48"  y="210" width="10" height="7" rx="3" fill="#9aa6b4"/>
-          <rect x="162" y="210" width="10" height="7" rx="3" fill="#9aa6b4"/>
+          <rect x="30" y="8" width="160" height="204" rx="18" fill="none" stroke="#a0abba" stroke-width="1.4"/>
+          <rect x="48"  y="210" width="10" height="7" rx="3" fill="#64748b"/>
+          <rect x="162" y="210" width="10" height="7" rx="3" fill="#64748b"/>
           <rect x="38" y="18" width="144" height="28" rx="6" fill="#1e2c4d"/>
           <text id="dispTime" x="110" y="36" text-anchor="middle" font-family="ui-monospace, Consolas, monospace" font-size="12" font-weight="700" fill="#22b263" letter-spacing="1">--:--</text>
           <rect x="42" y="54" width="136" height="146" rx="12" fill="url(#dw-door)"/>
           <g class="water-jets">
-            <path d="M 70 120 Q 110 80 150 120" fill="none" stroke="#56a8ff" stroke-width="3" stroke-dasharray="6 4" opacity="0.8"/>
-            <path d="M 70 160 Q 110 120 150 160" fill="none" stroke="#56a8ff" stroke-width="3" stroke-dasharray="6 4" opacity="0.8"/>
+            <path d="M 70 120 Q 110 80 150 120" fill="none" stroke="#38bdf8" stroke-width="3" stroke-dasharray="6 4" opacity="0.8"/>
+            <path d="M 70 160 Q 110 120 150 160" fill="none" stroke="#38bdf8" stroke-width="3" stroke-dasharray="6 4" opacity="0.8"/>
             <circle cx="90" cy="130" r="12" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.5"/>
             <circle cx="130" cy="130" r="12" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.5"/>
           </g>
           <g class="arcs">
-            <circle cx="110" cy="128" r="53" fill="none" stroke="#2f80ed" stroke-width="4" stroke-linecap="round" stroke-dasharray="80 120" opacity=".7"/>
+            <circle cx="110" cy="128" r="53" fill="none" stroke="#38bdf8" stroke-width="4" stroke-linecap="round" stroke-dasharray="80 120" opacity=".8"/>
           </g>
         </svg>
       `;
@@ -260,11 +260,11 @@ class ApplianceCard extends HTMLElement {
             <stop offset="1" stop-color="#090c12"/>
           </radialGradient>
         </defs>
-        <ellipse cx="110" cy="222" rx="76" ry="7" fill="#20304a" opacity=".16"/>
-        <rect x="44" y="216" width="12" height="6" rx="2" fill="#121315"/>
-        <rect x="164" y="216" width="12" height="6" rx="2" fill="#121315"/>
+        <ellipse cx="110" cy="222" rx="76" ry="7" fill="#000000" opacity=".3"/>
+        <rect x="44" y="216" width="12" height="6" rx="2" fill="#0f172a"/>
+        <rect x="164" y="216" width="12" height="6" rx="2" fill="#0f172a"/>
         <rect x="30" y="8" width="160" height="210" rx="14" fill="#ffffff"/>
-        <rect x="30" y="8" width="160" height="210" rx="14" fill="none" stroke="#d0d6de" stroke-width="1.5"/>
+        <rect x="30" y="8" width="160" height="210" rx="14" fill="none" stroke="#cbd5e1" stroke-width="1.5"/>
         <path d="M 30 22 L 30 50 L 190 50 L 190 22 A 14 14 0 0 0 176 8 L 44 8 A 14 14 0 0 0 30 22 Z" fill="#111317"/>
         <line x1="30" y1="50" x2="190" y2="50" stroke="#2a2e37" stroke-width="1"/>
         <text x="36" y="24" font-family="sans-serif" font-size="6" font-weight="900" fill="#ffffff" letter-spacing="0.6">MILANO</text>
@@ -287,10 +287,10 @@ class ApplianceCard extends HTMLElement {
         </g>
         <ellipse cx="96" cy="116" rx="20" ry="10" fill="#ffffff" opacity=".12" transform="rotate(-24 96 116)"/>
         <g class="arcs">
-          <circle cx="110" cy="136" r="49" fill="none" stroke="#2f80ed" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="90 60" opacity=".9"/>
+          <circle cx="110" cy="136" r="49" fill="none" stroke="#38bdf8" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="90 60" opacity=".9"/>
         </g>
-        <rect x="150" y="186" width="22" height="18" rx="3" fill="#ffffff" stroke="#c8ced7" stroke-width="1.2"/>
-        <line x1="168" y1="195" x2="168" y2="199" stroke="#9aa3af" stroke-width="1.2" stroke-linecap="round"/>
+        <rect x="150" y="186" width="22" height="18" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+        <line x1="168" y1="195" x2="168" y2="199" stroke="#94a3b8" stroke-width="1.2" stroke-linecap="round"/>
       </svg>
     `;
   }
@@ -307,115 +307,34 @@ class ApplianceCard extends HTMLElement {
       <style>
         :host {
           display: block;
-          --card-bg: linear-gradient(180deg, #edf3fb 0%, #e4edf8 55%, #dfe9f6 100%);
-          --text-primary: #1c2733;
-          --text-secondary: #506173;
-          --text-muted: #8a95a3;
-          --icon-bg: #ffffff;
-          --icon-shadow: 0 3px 10px rgba(47,128,237,.18);
-          --btn-bg: rgba(255,255,255,.75);
-          --btn-border: #d8e0ea;
-          --btn-color: #7d8894;
-          --badge-idle-bg: #e3e8ee;
-          --badge-idle-text: #6b7684;
-          --badge-idle-dot: #9aa5b1;
-          --badge-run-bg: #d9f2e2;
-          --badge-run-text: #1c9a55;
-          --panel-bg: rgba(255,255,255,.72);
-          --panel-border: rgba(255,255,255,.9);
-          --panel-shadow: 0 2px 10px rgba(38,63,97,.05);
-          --ring-track: #dde5ee;
-          --ring-arc: #2f80ed;
-          --bar-bg: #e2e9f1;
-          --power-bg: rgba(47, 128, 237, 0.08);
-          --power-border: rgba(47, 128, 237, 0.15);
-          --power-color: #2f80ed;
-          --accent-blue: #2f80ed;
-        }
-
-        /* Темна тема системна / за замовчуванням */
-        @media (prefers-color-scheme: dark) {
-          :host {
-            --card-bg: linear-gradient(180deg, #1c2433 0%, #141a26 100%);
-            --text-primary: #f1f5f9;
-            --text-secondary: #94a3b8;
-            --text-muted: #64748b;
-            --icon-bg: #222c3d;
-            --icon-shadow: 0 4px 12px rgba(0,0,0,.35);
-            --btn-bg: rgba(34, 44, 61, 0.8);
-            --btn-border: rgba(255,255,255,.1);
-            --btn-color: #94a3b8;
-            --badge-idle-bg: #2a3547;
-            --badge-idle-text: #94a3b8;
-            --badge-idle-dot: #64748b;
-            --badge-run-bg: rgba(34, 178, 99, 0.2);
-            --badge-run-text: #4ade80;
-            --panel-bg: rgba(30, 41, 59, 0.7);
-            --panel-border: rgba(255, 255, 255, 0.08);
-            --panel-shadow: 0 4px 14px rgba(0,0,0,.25);
-            --ring-track: #2a3547;
-            --ring-arc: #38bdf8;
-            --bar-bg: #2a3547;
-            --power-bg: rgba(56, 189, 248, 0.12);
-            --power-border: rgba(56, 189, 248, 0.25);
-            --power-color: #38bdf8;
-            --accent-blue: #38bdf8;
-          }
-        }
-
-        /* Перемикач тем у Home Assistant */
-        .wrap.dark {
-          --card-bg: linear-gradient(180deg, #1c2433 0%, #141a26 100%);
-          --text-primary: #f1f5f9;
+          --card-bg: linear-gradient(180deg, #1e2638 0%, #141b29 100%);
+          --text-primary: #f8fafc;
           --text-secondary: #94a3b8;
           --text-muted: #64748b;
-          --icon-bg: #222c3d;
-          --icon-shadow: 0 4px 12px rgba(0,0,0,.35);
-          --btn-bg: rgba(34, 44, 61, 0.8);
-          --btn-border: rgba(255,255,255,.1);
-          --btn-color: #94a3b8;
-          --badge-idle-bg: #2a3547;
-          --badge-idle-text: #94a3b8;
+          --icon-bg: #28334a;
+          --icon-shadow: 0 4px 12px rgba(0,0,0,.4);
+          --btn-bg: rgba(255, 255, 255, 0.08);
+          --btn-border: rgba(255, 255, 255, 0.12);
+          --btn-color: #cbd5e1;
+          --badge-idle-bg: rgba(255, 255, 255, 0.1);
+          --badge-idle-text: #cbd5e1;
           --badge-idle-dot: #64748b;
-          --badge-run-bg: rgba(34, 178, 99, 0.2);
+          --badge-run-bg: rgba(34, 197, 94, 0.2);
           --badge-run-text: #4ade80;
-          --panel-bg: rgba(30, 41, 59, 0.7);
-          --panel-border: rgba(255, 255, 255, 0.08);
-          --panel-shadow: 0 4px 14px rgba(0,0,0,.25);
-          --ring-track: #2a3547;
+          --panel-bg: rgba(15, 23, 42, 0.65);
+          --panel-border: rgba(255, 255, 255, 0.1);
+          --panel-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+          --ring-track: rgba(255, 255, 255, 0.1);
           --ring-arc: #38bdf8;
-          --bar-bg: #2a3547;
-          --power-bg: rgba(56, 189, 248, 0.12);
-          --power-border: rgba(56, 189, 248, 0.25);
+          --bar-bg: rgba(255, 255, 255, 0.1);
+          --power-bg: rgba(56, 189, 248, 0.15);
+          --power-border: rgba(56, 189, 248, 0.3);
           --power-color: #38bdf8;
           --accent-blue: #38bdf8;
         }
 
-        .wrap.light {
-          --card-bg: linear-gradient(180deg, #edf3fb 0%, #e4edf8 55%, #dfe9f6 100%);
-          --text-primary: #1c2733;
-          --text-secondary: #506173;
-          --text-muted: #8a95a3;
-          --icon-bg: #ffffff;
-          --icon-shadow: 0 3px 10px rgba(47,128,237,.18);
-          --btn-bg: rgba(255,255,255,.75);
-          --btn-border: #d8e0ea;
-          --btn-color: #7d8894;
-          --badge-idle-bg: #e3e8ee;
-          --badge-idle-text: #6b7684;
-          --badge-idle-dot: #9aa5b1;
-          --badge-run-bg: #d9f2e2;
-          --badge-run-text: #1c9a55;
-          --panel-bg: rgba(255,255,255,.72);
-          --panel-border: rgba(255,255,255,.9);
-          --panel-shadow: 0 2px 10px rgba(38,63,97,.05);
-          --ring-track: #dde5ee;
-          --ring-arc: #2f80ed;
-          --bar-bg: #e2e9f1;
-          --power-bg: rgba(47, 128, 237, 0.08);
-          --power-border: rgba(47, 128, 237, 0.15);
-          --power-color: #2f80ed;
-          --accent-blue: #2f80ed;
+        .wrap {
+          border-radius: 24px;
         }
 
         ha-card {
@@ -427,13 +346,13 @@ class ApplianceCard extends HTMLElement {
           background: var(--card-bg);
           color: var(--text-primary);
           font-family: var(--paper-font-body1_-_font-family, inherit);
-          box-shadow: var(--ha-card-box-shadow, 0 6px 20px rgba(0, 0, 0, .12));
-          transition: background 0.3s ease, color 0.3s ease;
+          box-shadow: var(--ha-card-box-shadow, 0 8px 24px rgba(0, 0, 0, .4));
+          border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         ha-card::before {
-          content: ""; position: absolute; top: 0; left: 0; right: 0; height: 5px;
-          background: linear-gradient(90deg, #2f80ed, #56a8ff);
+          content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+          background: linear-gradient(90deg, #38bdf8, #818cf8);
         }
 
         .header { display: flex; align-items: center; gap: 10px; }
@@ -453,14 +372,14 @@ class ApplianceCard extends HTMLElement {
           font-size: 11px; font-weight: 700; letter-spacing: .7px;
           padding: 6px 11px; border-radius: 999px;
           background: var(--badge-idle-bg); color: var(--badge-idle-text); white-space: nowrap;
-          transition: background 0.3s ease, color 0.3s ease;
+          border: 1px solid rgba(255, 255, 255, 0.05);
         }
         .badge .b-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--badge-idle-dot); }
-        .running .badge { background: var(--badge-run-bg); color: var(--badge-run-text); }
-        .running .badge .b-dot { background: #22b263; animation: pulse 1.6s ease-in-out infinite; }
+        .running .badge { background: var(--badge-run-bg); color: var(--badge-run-text); border-color: rgba(74, 222, 128, 0.3); }
+        .running .badge .b-dot { background: #4ade80; animation: pulse 1.6s ease-in-out infinite; }
         @keyframes pulse {
-          0%, 100% { box-shadow: 0 0 0 0 rgba(34,178,99,.45); }
-          50%      { box-shadow: 0 0 0 5px rgba(34,178,99,0); }
+          0%, 100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.45); }
+          50%      { box-shadow: 0 0 0 5px rgba(74, 222, 128, 0); }
         }
         .h-spacer { flex: 1; }
         .h-btn {
@@ -473,7 +392,7 @@ class ApplianceCard extends HTMLElement {
         .h-btn ha-icon { --mdc-icon-size: 19px; }
 
         .hero { display: flex; justify-content: center; padding: 14px 0 6px; }
-        .machine { width: 210px; max-width: 62%; cursor: pointer; }
+        .machine { width: 210px; max-width: 62%; cursor: pointer; filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.4)); }
         .laundry { transform-origin: 110px 136px; }
         .arcs    { transform-origin: 110px 136px; }
         .water-jets { transform-origin: 110px 128px; }
@@ -497,14 +416,14 @@ class ApplianceCard extends HTMLElement {
           border: 1px solid var(--panel-border);
           border-radius: 18px; padding: 14px 16px; margin-top: 12px;
           box-shadow: var(--panel-shadow);
-          position: relative; transition: background 0.3s ease, border-color 0.3s ease;
+          position: relative; backdrop-filter: blur(8px);
         }
 
         .status-panel { display: flex; align-items: center; gap: 16px; }
         .ring-box { position: relative; width: 92px; height: 92px; flex-shrink: 0; cursor: pointer; }
         .ring-box svg { width: 100%; height: 100%; }
-        .ring-track { stroke: var(--ring-track); transition: stroke 0.3s ease; }
-        .ring-arc { stroke: var(--ring-arc); stroke-linecap: round; transition: stroke-dashoffset 0.5s ease, stroke 0.3s ease; }
+        .ring-track { stroke: var(--ring-track); }
+        .ring-arc { stroke: var(--ring-arc); stroke-linecap: round; transition: stroke-dashoffset 0.5s ease; }
         .ring-anim { transform-origin: 48px 48px; }
         .running .ring-anim { animation: spin 2.5s linear infinite; }
 
@@ -522,8 +441,8 @@ class ApplianceCard extends HTMLElement {
         .st-program { font-size: 16px; font-weight: 800; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .st-elapsed { font-size: 13px; color: var(--text-secondary); font-weight: 600; margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         
-        .bar { height: 8px; border-radius: 6px; background: var(--bar-bg); margin-top: 10px; overflow: hidden; transition: background 0.3s ease; }
-        .bar-fill { height: 100%; border-radius: 6px; width: 0%; background: linear-gradient(90deg, #2f80ed, #56a8ff); transition: width .5s ease; }
+        .bar { height: 8px; border-radius: 6px; background: var(--bar-bg); margin-top: 10px; overflow: hidden; }
+        .bar-fill { height: 100%; border-radius: 6px; width: 0%; background: linear-gradient(90deg, #38bdf8, #818cf8); transition: width .5s ease; }
 
         .power-badge {
           position: absolute; top: 14px; right: 16px;
@@ -531,11 +450,11 @@ class ApplianceCard extends HTMLElement {
           font-size: 12px; font-weight: 800; color: var(--power-color);
           background: var(--power-bg); padding: 4px 8px;
           border-radius: 8px; border: 1px solid var(--power-border);
-          cursor: pointer; transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+          cursor: pointer;
         }
         .power-badge ha-icon { --mdc-icon-size: 14px; color: var(--power-color); }
         
-        .alert-box { padding: 12px; background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.25); border-radius: 12px; font-weight: 600; font-size: 13px; text-align: center; }
+        .alert-box { padding: 12px; background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 12px; font-weight: 600; font-size: 13px; text-align: center; }
       </style>
 
       <ha-card>
@@ -609,11 +528,6 @@ class ApplianceCard extends HTMLElement {
     const t = this._t;
     const wrap = root.getElementById("wrap");
     if (!wrap) return;
-
-    // Перевірка активної темної теми Home Assistant
-    const isDark = Boolean(this._hass?.themes?.darkMode);
-    wrap.classList.toggle("dark", isDark);
-    wrap.classList.toggle("light", !isDark);
 
     const mainContent = root.getElementById("mainContent");
     const alertBox = root.getElementById("alertBox");
@@ -694,7 +608,7 @@ class ApplianceCard extends HTMLElement {
     const stProgramEl = root.getElementById("stProgram");
     if (stProgramEl) stProgramEl.textContent = programText;
 
-    // Час роботи (elapsed_time) у центральній панелі
+    // Час роботи (elapsed_time)
     const defaultElapsedEntity = isDw ? "sensor.dishwasher_elapsed_time" : "sensor.washing_machine_elapsed_time";
     const elapsedEntityId = c.elapsed_entity || defaultElapsedEntity;
     const elapsedSec = this._st(elapsedEntityId)?.state;

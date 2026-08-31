@@ -4,6 +4,7 @@
 [![GitHub Release](https://img.shields.io/github/v/release/WildeRNS/appliance-card)](https://github.com/WildeRNS/appliance-card/releases)
 
 Анімована картка для Home Assistant для відображення стану **пральної** та **посудомийної** машин із підтримкою **візуального редактора UI**.
+Дана картка використовує сенсори з інтеграції [WashData](https://github.com/3dg1luk43/ha_washdata)
 
 ![Appliance Card Preview](preview.png)
 ![Appliance Card Config](config.png)

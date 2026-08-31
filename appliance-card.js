@@ -230,7 +230,7 @@ class ApplianceCard extends HTMLElement {
               <stop offset="1" stop-color="#1a252f"/>
             </linearGradient>
           </defs>
-          <ellipse cx="110" cy="222" rx="76" ry="8" fill="#000000" opacity=".2"/>
+          <ellipse cx="110" cy="222" rx="76" ry="8" fill="#000000" opacity=".15"/>
           <rect x="30" y="8" width="160" height="204" rx="18" fill="url(#dw-body)"/>
           <rect x="30" y="8" width="160" height="204" rx="18" fill="none" stroke="#a0abba" stroke-width="1.4"/>
           <rect x="48"  y="210" width="10" height="7" rx="3" fill="#64748b"/>
@@ -260,7 +260,7 @@ class ApplianceCard extends HTMLElement {
             <stop offset="1" stop-color="#090c12"/>
           </radialGradient>
         </defs>
-        <ellipse cx="110" cy="222" rx="76" ry="7" fill="#000000" opacity=".2"/>
+        <ellipse cx="110" cy="222" rx="76" ry="7" fill="#000000" opacity=".15"/>
         <rect x="44" y="216" width="12" height="6" rx="2" fill="#0f172a"/>
         <rect x="164" y="216" width="12" height="6" rx="2" fill="#0f172a"/>
         <rect x="30" y="8" width="160" height="210" rx="14" fill="#ffffff"/>
@@ -305,106 +305,48 @@ class ApplianceCard extends HTMLElement {
     const root = this.shadowRoot || this.attachShadow({ mode: "open" });
     root.innerHTML = `
       <style>
-        /* Світла тема (за замовчуванням) */
         :host {
           display: block;
-          --card-bg: linear-gradient(180deg, #edf3fb 0%, #e4edf8 55%, #dfe9f6 100%);
-          --text-primary: #1c2733;
-          --text-secondary: #506173;
-          --text-muted: #8a95a3;
+        }
+
+        /* За замовчуванням — СВІТЛА ТЕМА */
+        .wrap {
+          --card-bg: #f0f4f9;
+          --text-primary: #1e293b;
+          --text-secondary: #475569;
+          --text-muted: #64748b;
           --icon-bg: #ffffff;
-          --icon-shadow: 0 3px 10px rgba(47,128,237,.18);
-          --btn-bg: rgba(255,255,255,.75);
-          --btn-border: #d8e0ea;
-          --btn-color: #7d8894;
-          --badge-idle-bg: #e3e8ee;
-          --badge-idle-text: #6b7684;
-          --badge-idle-dot: #9aa5b1;
-          --badge-run-bg: #d9f2e2;
-          --badge-run-text: #1c9a55;
-          --panel-bg: rgba(255,255,255,.72);
-          --panel-border: rgba(255,255,255,.9);
-          --panel-shadow: 0 2px 10px rgba(38,63,97,.05);
-          --ring-track: #dde5ee;
-          --ring-arc: #2f80ed;
-          --bar-bg: #e2e9f1;
-          --power-bg: rgba(47, 128, 237, 0.08);
-          --power-border: rgba(47, 128, 237, 0.15);
-          --power-color: #2f80ed;
-          --accent-blue: #2f80ed;
-          --card-border: none;
-          --shadow-effect: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+          --icon-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+          --btn-bg: #ffffff;
+          --btn-border: #cbd5e1;
+          --btn-color: #475569;
+          --badge-idle-bg: #e2e8f0;
+          --badge-idle-text: #475569;
+          --badge-idle-dot: #94a3b8;
+          --badge-run-bg: #dcfce7;
+          --badge-run-text: #166534;
+          --panel-bg: rgba(255, 255, 255, 0.85);
+          --panel-border: #cbd5e1;
+          --panel-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+          --ring-track: #e2e8f0;
+          --ring-arc: #0284c7;
+          --bar-bg: #e2e8f0;
+          --power-bg: #e0f2fe;
+          --power-border: #bae6fd;
+          --power-color: #0369a1;
+          --accent-blue: #0284c7;
+          --card-border: 1px solid #cbd5e1;
+          --shadow-effect: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.08));
         }
 
-        /* Темна тема системна */
-        @media (prefers-color-scheme: dark) {
-          :host {
-            --card-bg: linear-gradient(180deg, #1e2638 0%, #141b29 100%);
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --text-muted: #64748b;
-            --icon-bg: #28334a;
-            --icon-shadow: 0 4px 12px rgba(0,0,0,.4);
-            --btn-bg: rgba(255, 255, 255, 0.08);
-            --btn-border: rgba(255, 255, 255, 0.12);
-            --btn-color: #cbd5e1;
-            --badge-idle-bg: rgba(255, 255, 255, 0.1);
-            --badge-idle-text: #cbd5e1;
-            --badge-idle-dot: #64748b;
-            --badge-run-bg: rgba(34, 197, 94, 0.2);
-            --badge-run-text: #4ade80;
-            --panel-bg: rgba(15, 23, 42, 0.65);
-            --panel-border: rgba(255, 255, 255, 0.1);
-            --panel-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
-            --ring-track: rgba(255, 255, 255, 0.1);
-            --ring-arc: #38bdf8;
-            --bar-bg: rgba(255, 255, 255, 0.1);
-            --power-bg: rgba(56, 189, 248, 0.15);
-            --power-border: rgba(56, 189, 248, 0.3);
-            --power-color: #38bdf8;
-            --accent-blue: #38bdf8;
-            --card-border: 1px solid rgba(255, 255, 255, 0.08);
-            --shadow-effect: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.4));
-          }
-        }
-
-        /* Ручне / автоматичне перемикання тем у Home Assistant */
-        .wrap.light {
-          --card-bg: linear-gradient(180deg, #edf3fb 0%, #e4edf8 55%, #dfe9f6 100%);
-          --text-primary: #1c2733;
-          --text-secondary: #506173;
-          --text-muted: #8a95a3;
-          --icon-bg: #ffffff;
-          --icon-shadow: 0 3px 10px rgba(47,128,237,.18);
-          --btn-bg: rgba(255,255,255,.75);
-          --btn-border: #d8e0ea;
-          --btn-color: #7d8894;
-          --badge-idle-bg: #e3e8ee;
-          --badge-idle-text: #6b7684;
-          --badge-idle-dot: #9aa5b1;
-          --badge-run-bg: #d9f2e2;
-          --badge-run-text: #1c9a55;
-          --panel-bg: rgba(255,255,255,.72);
-          --panel-border: rgba(255,255,255,.9);
-          --panel-shadow: 0 2px 10px rgba(38,63,97,.05);
-          --ring-track: #dde5ee;
-          --ring-arc: #2f80ed;
-          --bar-bg: #e2e9f1;
-          --power-bg: rgba(47, 128, 237, 0.08);
-          --power-border: rgba(47, 128, 237, 0.15);
-          --power-color: #2f80ed;
-          --accent-blue: #2f80ed;
-          --card-border: none;
-          --shadow-effect: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
-        }
-
+        /* ТЕМНА ТЕМА */
         .wrap.dark {
           --card-bg: linear-gradient(180deg, #1e2638 0%, #141b29 100%);
           --text-primary: #f8fafc;
           --text-secondary: #94a3b8;
           --text-muted: #64748b;
           --icon-bg: #28334a;
-          --icon-shadow: 0 4px 12px rgba(0,0,0,.4);
+          --icon-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
           --btn-bg: rgba(255, 255, 255, 0.08);
           --btn-border: rgba(255, 255, 255, 0.12);
           --btn-color: #cbd5e1;
@@ -436,7 +378,7 @@ class ApplianceCard extends HTMLElement {
           background: var(--card-bg);
           color: var(--text-primary);
           font-family: var(--paper-font-body1_-_font-family, inherit);
-          box-shadow: var(--ha-card-box-shadow, 0 6px 20px rgba(0, 0, 0, .12));
+          box-shadow: var(--ha-card-box-shadow, 0 6px 20px rgba(0, 0, 0, .08));
           border: var(--card-border);
           transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
@@ -463,7 +405,7 @@ class ApplianceCard extends HTMLElement {
           font-size: 11px; font-weight: 700; letter-spacing: .7px;
           padding: 6px 11px; border-radius: 999px;
           background: var(--badge-idle-bg); color: var(--badge-idle-text); white-space: nowrap;
-          border: 1px solid rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(0, 0, 0, 0.05);
           transition: background 0.3s ease, color 0.3s ease;
         }
         .badge .b-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--badge-idle-dot); }
@@ -613,6 +555,25 @@ class ApplianceCard extends HTMLElement {
     this._built = true;
   }
 
+  _isDarkMode() {
+    // 1. Пряма перевірка HA theme
+    if (this._hass?.themes?.darkMode === true) return true;
+    if (this._hass?.themes?.darkMode === false) return false;
+
+    // 2. Перевірка фону документа (якщо світлий інтерфейс - повертає false)
+    const bg = getComputedStyle(document.body).backgroundColor;
+    if (bg) {
+      const rgb = bg.match(/\d+/g);
+      if (rgb && rgb.length >= 3) {
+        const brightness = (parseInt(rgb[0]) * 299 + parseInt(rgb[1]) * 587 + parseInt(rgb[2]) * 114) / 1000;
+        if (brightness > 150) return false; // Явно світлий фон
+      }
+    }
+
+    // 3. Системний режим OS
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+
   _update() {
     const root = this.shadowRoot;
     if (!root) return;
@@ -622,10 +583,9 @@ class ApplianceCard extends HTMLElement {
     const wrap = root.getElementById("wrap");
     if (!wrap) return;
 
-    // Автоматичне перемикання світла/темна тема
-    const isDark = this._hass?.themes?.darkMode ?? window.matchMedia('(prefers-color-scheme: dark)').matches;
-    wrap.classList.toggle("dark", Boolean(isDark));
-    wrap.classList.toggle("light", !isDark);
+    // Автоматичне виявлення теми
+    const isDark = this._isDarkMode();
+    wrap.classList.toggle("dark", isDark);
 
     const mainContent = root.getElementById("mainContent");
     const alertBox = root.getElementById("alertBox");

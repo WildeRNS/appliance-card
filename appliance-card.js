@@ -310,6 +310,8 @@ class ApplianceCard extends HTMLElement {
         }
 
         ha-card {
+          --ha-card-background: transparent !important;
+          --card-background-color: transparent !important;
           background: transparent !important;
           border: none !important;
           box-shadow: none !important;
@@ -320,12 +322,12 @@ class ApplianceCard extends HTMLElement {
         /* ОСНОВНА ОБОРУТКА КАРТКИ */
         .wrap {
           /* СВІТЛА ТЕМА */
-          --card-bg: #f0f4f9;
+          --card-bg: linear-gradient(145deg, #ffffff 0%, #f1f5f9 100%);
           --text-primary: #1e293b;
           --text-secondary: #475569;
           --text-muted: #64748b;
           --icon-bg: #ffffff;
-          --icon-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+          --icon-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
           --btn-bg: #ffffff;
           --btn-border: #cbd5e1;
           --btn-color: #475569;
@@ -334,9 +336,9 @@ class ApplianceCard extends HTMLElement {
           --badge-idle-dot: #94a3b8;
           --badge-run-bg: #dcfce7;
           --badge-run-text: #166534;
-          --panel-bg: rgba(255, 255, 255, 0.85);
+          --panel-bg: rgba(255, 255, 255, 0.9);
           --panel-border: #cbd5e1;
-          --panel-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+          --panel-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
           --ring-track: #e2e8f0;
           --ring-arc: #0284c7;
           --bar-bg: #e2e8f0;
@@ -347,46 +349,46 @@ class ApplianceCard extends HTMLElement {
           --card-border: 1px solid #cbd5e1;
           --shadow-effect: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.08));
 
-          background: var(--card-bg);
+          background: var(--card-bg) !important;
           color: var(--text-primary);
           border-radius: 24px;
           padding: 16px;
           position: relative;
           overflow: hidden;
           border: var(--card-border);
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
           transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
           font-family: var(--paper-font-body1_-_font-family, inherit);
         }
 
-        /* ТЕМНА ТЕМА (ВИРАЗНИЙ СЛИТНО-СИНІЙ ФОН СЛИТНОГО КОЛЬОРУ) */
+        /* ТЕМНА ТЕМА (ЯСКРАВИЙ СЛИТНО-СИНІЙ КОНТРАСТНИЙ ФОН) */
         .wrap.dark {
-          --card-bg: linear-gradient(180deg, #2d384d 0%, #1e2736 100%);
-          --text-primary: #f8fafc;
+          --card-bg: linear-gradient(145deg, #3d4d6d 0%, #2b374e 100%);
+          --text-primary: #ffffff;
           --text-secondary: #cbd5e1;
           --text-muted: #94a3b8;
-          --icon-bg: rgba(255, 255, 255, 0.1);
-          --icon-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-          --btn-bg: rgba(255, 255, 255, 0.1);
-          --btn-border: rgba(255, 255, 255, 0.18);
+          --icon-bg: rgba(255, 255, 255, 0.15);
+          --icon-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+          --btn-bg: rgba(255, 255, 255, 0.15);
+          --btn-border: rgba(255, 255, 255, 0.25);
           --btn-color: #f1f5f9;
-          --badge-idle-bg: rgba(255, 255, 255, 0.12);
-          --badge-idle-text: #e2e8f0;
+          --badge-idle-bg: rgba(255, 255, 255, 0.15);
+          --badge-idle-text: #f1f5f9;
           --badge-idle-dot: #94a3b8;
-          --badge-run-bg: rgba(34, 197, 94, 0.25);
+          --badge-run-bg: rgba(34, 197, 94, 0.3);
           --badge-run-text: #4ade80;
-          --panel-bg: rgba(15, 23, 42, 0.55);
-          --panel-border: rgba(255, 255, 255, 0.15);
-          --panel-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
-          --ring-track: rgba(255, 255, 255, 0.15);
+          --panel-bg: rgba(15, 23, 42, 0.6);
+          --panel-border: rgba(255, 255, 255, 0.2);
+          --panel-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+          --ring-track: rgba(255, 255, 255, 0.2);
           --ring-arc: #38bdf8;
-          --bar-bg: rgba(255, 255, 255, 0.15);
-          --power-bg: rgba(56, 189, 248, 0.2);
-          --power-border: rgba(56, 189, 248, 0.4);
+          --bar-bg: rgba(255, 255, 255, 0.2);
+          --power-bg: rgba(56, 189, 248, 0.25);
+          --power-border: rgba(56, 189, 248, 0.5);
           --power-color: #38bdf8;
           --accent-blue: #38bdf8;
-          --card-border: 1px solid rgba(255, 255, 255, 0.18);
-          --shadow-effect: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.35));
+          --card-border: 1px solid rgba(255, 255, 255, 0.25);
+          --shadow-effect: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.45));
         }
 
         .wrap::before {
@@ -411,11 +413,11 @@ class ApplianceCard extends HTMLElement {
           font-size: 11px; font-weight: 700; letter-spacing: .7px;
           padding: 6px 11px; border-radius: 999px;
           background: var(--badge-idle-bg); color: var(--badge-idle-text); white-space: nowrap;
-          border: 1px solid rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.1);
           transition: background 0.3s ease, color 0.3s ease;
         }
         .badge .b-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--badge-idle-dot); }
-        .running .badge { background: var(--badge-run-bg); color: var(--badge-run-text); border-color: rgba(74, 222, 128, 0.3); }
+        .running .badge { background: var(--badge-run-bg); color: var(--badge-run-text); border-color: rgba(74, 222, 128, 0.4); }
         .running .badge .b-dot { background: #4ade80; animation: pulse 1.6s ease-in-out infinite; }
         @keyframes pulse {
           0%, 100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.45); }

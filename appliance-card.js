@@ -35,6 +35,7 @@ class ApplianceCardEditor extends HTMLElement {
         { name: "status_entity", label: "Сенсор стану (Status / Binary Sensor) *", selector: { entity: {} } },
         { name: "program_entity", label: "Сенсор програми (Program)", selector: { entity: {} } },
         { name: "phase_entity", label: "Сенсор фази (Phase)", selector: { entity: {} } },
+        { name: "elapsed_entity", label: "Сенсор часу роботи в сек (Elapsed Time)", selector: { entity: {} } },
         { name: "progress_entity", label: "Сенсор прогресу % (Progress)", selector: { entity: {} } },
         { name: "remaining_entity", label: "Сенсор залишку часу хв (Remaining Time)", selector: { entity: {} } },
         { name: "power_entity", label: "Сенсор потужності Вт (Power)", selector: { entity: {} } },
@@ -98,6 +99,7 @@ class ApplianceCard extends HTMLElement {
       status_entity: "",
       program_entity: "",
       phase_entity: "",
+      elapsed_entity: "",
       progress_entity: "",
       remaining_entity: "",
       power_entity: "",
@@ -116,7 +118,7 @@ class ApplianceCard extends HTMLElement {
   }
 
   getCardSize() {
-    return 5;
+    return 4;
   }
 
   connectedCallback() {
@@ -164,6 +166,19 @@ class ApplianceCard extends HTMLElement {
       return `${h} ${t.hour} ${remM} ${t.min}`;
     }
     return `${remM} ${t.min}`;
+  }
+
+  _fmtElapsedTime(seconds) {
+    const sec = parseInt(seconds, 10);
+    if (isNaN(sec) || sec <= 0) return "";
+    const t = this._t;
+    const totalMin = Math.floor(sec / 60);
+    const h = Math.floor(totalMin / 60);
+    const remM = totalMin % 60;
+    if (h > 0) {
+      return `${h} ${t.hour} ${remM} ${t.min}`;
+    }
+    return `${totalMin} ${t.min}`;
   }
 
   _fmtPower(val) {
@@ -294,7 +309,7 @@ class ApplianceCard extends HTMLElement {
         ha-card {
           display: block;
           border-radius: 24px;
-          padding: 16px 16px 14px;
+          padding: 16px 16px 16px;
           overflow: hidden;
           position: relative;
           background: linear-gradient(180deg, #edf3fb 0%, #e4edf8 55%, #dfe9f6 100%);
@@ -390,7 +405,7 @@ class ApplianceCard extends HTMLElement {
 
         .st-col { flex: 1; min-width: 0; padding-right: 48px; }
         .st-program { font-size: 16px; font-weight: 800; color: #1c2733; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .st-phase { font-size: 13px; color: #506173; font-weight: 600; margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .st-elapsed { font-size: 13px; color: #506173; font-weight: 600; margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         
         .bar { height: 8px; border-radius: 6px; background: #e2e9f1; margin-top: 10px; overflow: hidden; }
         .bar-fill { height: 100%; border-radius: 6px; width: 0%; background: linear-gradient(90deg, #2f80ed, #56a8ff); transition: width .5s ease; }
@@ -404,11 +419,6 @@ class ApplianceCard extends HTMLElement {
           cursor: pointer;
         }
         .power-badge ha-icon { --mdc-icon-size: 14px; color: #2f80ed; }
-
-        .info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 12px; }
-        .info-card { background: rgba(255,255,255,.72); border: 1px solid rgba(255,255,255,.9); border-radius: 14px; padding: 10px 12px; cursor: pointer; }
-        .info-label { font-size: 10px; font-weight: 700; letter-spacing: .8px; color: #8a95a3; }
-        .info-value { font-size: 13.5px; font-weight: 700; margin-top: 3px; color: #1c2733; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         
         .alert-box { padding: 12px; background: #fee2e2; color: #991b1b; border-radius: 12px; font-weight: 600; font-size: 13px; text-align: center; }
       </style>
@@ -454,19 +464,8 @@ class ApplianceCard extends HTMLElement {
 
               <div class="st-col">
                 <div class="st-program" id="stProgram">---</div>
-                <div class="st-phase" id="stPhase">---</div>
+                <div class="st-elapsed" id="stElapsed" style="display: none;"></div>
                 <div class="bar" id="bar"><div class="bar-fill" id="barFill"></div></div>
-              </div>
-            </div>
-
-            <div class="info-grid">
-              <div class="info-card" id="cardProg">
-                <div class="info-label">${t.program}</div>
-                <div class="info-value" id="valProgram">---</div>
-              </div>
-              <div class="info-card" id="cardPhase">
-                <div class="info-label">${t.phase}</div>
-                <div class="info-value" id="valPhase">---</div>
               </div>
             </div>
           </div>
@@ -483,8 +482,6 @@ class ApplianceCard extends HTMLElement {
     root.getElementById("chartBtn")?.addEventListener("click", mi(c.status_entity));
     root.getElementById("ringBox")?.addEventListener("click", mi(c.remaining_entity || c.status_entity));
     root.getElementById("powerBadge")?.addEventListener("click", mi(c.power_entity));
-    root.getElementById("cardProg")?.addEventListener("click", mi(c.program_entity));
-    root.getElementById("cardPhase")?.addEventListener("click", mi(c.phase_entity));
 
     this._built = true;
   }
@@ -520,11 +517,25 @@ class ApplianceCard extends HTMLElement {
 
     const status = this._st(c.status_entity);
     const noData = !status || ["unknown", "unavailable"].includes(status.state);
+    
+    // Фаза у верхньому баджі
+    const rawPhase = c.phase_entity ? this._st(c.phase_entity)?.state : null;
+    const phaseVal = (rawPhase && !["off", "unavailable", "unknown", "none", "idle", "null", ""].includes(String(rawPhase).toLowerCase())) 
+      ? String(rawPhase).trim() 
+      : "";
+
     const badgeTextEl = root.getElementById("badgeText");
     if (badgeTextEl) {
-      badgeTextEl.textContent = noData ? t.badge_nodata : running ? t.badge_running : t.badge_idle;
+      if (noData) {
+        badgeTextEl.textContent = t.badge_nodata;
+      } else if (running) {
+        badgeTextEl.textContent = phaseVal ? `${t.badge_running} / ${phaseVal}` : t.badge_running;
+      } else {
+        badgeTextEl.textContent = t.badge_idle;
+      }
     }
 
+    // Залишок часу
     const remState = c.remaining_entity ? this._st(c.remaining_entity)?.state : null;
     const remFmt = running ? this._fmtTimeRemaining(remState) : "---";
 
@@ -537,10 +548,12 @@ class ApplianceCard extends HTMLElement {
     const ringLabelEl = root.getElementById("ringLabel");
     if (ringLabelEl) ringLabelEl.textContent = running ? t.ring_running : t.ring_idle;
 
+    // Потужність
     const powerRaw = c.power_entity ? this._st(c.power_entity)?.state : null;
     const powerValEl = root.getElementById("powerVal");
     if (powerValEl) powerValEl.textContent = this._fmtPower(powerRaw);
 
+    // Прогрес
     const progRaw = c.progress_entity ? this._st(c.progress_entity)?.state : null;
     const progNum = parseFloat(progRaw);
     let progress = isNaN(progNum) ? 0 : Math.min(100, Math.max(0, progNum));
@@ -556,20 +569,22 @@ class ApplianceCard extends HTMLElement {
     const barFillEl = root.getElementById("barFill");
     if (barFillEl) barFillEl.style.width = running ? `${progress}%` : "0%";
 
+    // Назва програми
     const programText = this._getCleanVal(c.program_entity, running);
-    const phaseText = this._getCleanVal(c.phase_entity, running);
-
     const stProgramEl = root.getElementById("stProgram");
     if (stProgramEl) stProgramEl.textContent = programText;
 
-    const stPhaseEl = root.getElementById("stPhase");
-    if (stPhaseEl) stPhaseEl.textContent = phaseText;
+    // Час роботи (elapsed_time) у центральній панелі
+    const defaultElapsedEntity = isDw ? "sensor.dishwasher_elapsed_time" : "sensor.washing_machine_elapsed_time";
+    const elapsedEntityId = c.elapsed_entity || defaultElapsedEntity;
+    const elapsedSec = this._st(elapsedEntityId)?.state;
+    const elapsedFmt = running ? this._fmtElapsedTime(elapsedSec) : "";
 
-    const valProgramEl = root.getElementById("valProgram");
-    if (valProgramEl) valProgramEl.textContent = programText;
-
-    const valPhaseEl = root.getElementById("valPhase");
-    if (valPhaseEl) valPhaseEl.textContent = phaseText;
+    const stElapsedEl = root.getElementById("stElapsed");
+    if (stElapsedEl) {
+      stElapsedEl.textContent = elapsedFmt;
+      stElapsedEl.style.display = elapsedFmt ? "block" : "none";
+    }
   }
 }
 

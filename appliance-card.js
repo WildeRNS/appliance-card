@@ -305,18 +305,132 @@ class ApplianceCard extends HTMLElement {
     const root = this.shadowRoot || this.attachShadow({ mode: "open" });
     root.innerHTML = `
       <style>
-        :host { display: block; }
+        :host {
+          display: block;
+          --card-bg: linear-gradient(180deg, #edf3fb 0%, #e4edf8 55%, #dfe9f6 100%);
+          --text-primary: #1c2733;
+          --text-secondary: #506173;
+          --text-muted: #8a95a3;
+          --icon-bg: #ffffff;
+          --icon-shadow: 0 3px 10px rgba(47,128,237,.18);
+          --btn-bg: rgba(255,255,255,.75);
+          --btn-border: #d8e0ea;
+          --btn-color: #7d8894;
+          --badge-idle-bg: #e3e8ee;
+          --badge-idle-text: #6b7684;
+          --badge-idle-dot: #9aa5b1;
+          --badge-run-bg: #d9f2e2;
+          --badge-run-text: #1c9a55;
+          --panel-bg: rgba(255,255,255,.72);
+          --panel-border: rgba(255,255,255,.9);
+          --panel-shadow: 0 2px 10px rgba(38,63,97,.05);
+          --ring-track: #dde5ee;
+          --ring-arc: #2f80ed;
+          --bar-bg: #e2e9f1;
+          --power-bg: rgba(47, 128, 237, 0.08);
+          --power-border: rgba(47, 128, 237, 0.15);
+          --power-color: #2f80ed;
+          --accent-blue: #2f80ed;
+        }
+
+        /* Темна тема системна / за замовчуванням */
+        @media (prefers-color-scheme: dark) {
+          :host {
+            --card-bg: linear-gradient(180deg, #1c2433 0%, #141a26 100%);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --icon-bg: #222c3d;
+            --icon-shadow: 0 4px 12px rgba(0,0,0,.35);
+            --btn-bg: rgba(34, 44, 61, 0.8);
+            --btn-border: rgba(255,255,255,.1);
+            --btn-color: #94a3b8;
+            --badge-idle-bg: #2a3547;
+            --badge-idle-text: #94a3b8;
+            --badge-idle-dot: #64748b;
+            --badge-run-bg: rgba(34, 178, 99, 0.2);
+            --badge-run-text: #4ade80;
+            --panel-bg: rgba(30, 41, 59, 0.7);
+            --panel-border: rgba(255, 255, 255, 0.08);
+            --panel-shadow: 0 4px 14px rgba(0,0,0,.25);
+            --ring-track: #2a3547;
+            --ring-arc: #38bdf8;
+            --bar-bg: #2a3547;
+            --power-bg: rgba(56, 189, 248, 0.12);
+            --power-border: rgba(56, 189, 248, 0.25);
+            --power-color: #38bdf8;
+            --accent-blue: #38bdf8;
+          }
+        }
+
+        /* Перемикач тем у Home Assistant */
+        .wrap.dark {
+          --card-bg: linear-gradient(180deg, #1c2433 0%, #141a26 100%);
+          --text-primary: #f1f5f9;
+          --text-secondary: #94a3b8;
+          --text-muted: #64748b;
+          --icon-bg: #222c3d;
+          --icon-shadow: 0 4px 12px rgba(0,0,0,.35);
+          --btn-bg: rgba(34, 44, 61, 0.8);
+          --btn-border: rgba(255,255,255,.1);
+          --btn-color: #94a3b8;
+          --badge-idle-bg: #2a3547;
+          --badge-idle-text: #94a3b8;
+          --badge-idle-dot: #64748b;
+          --badge-run-bg: rgba(34, 178, 99, 0.2);
+          --badge-run-text: #4ade80;
+          --panel-bg: rgba(30, 41, 59, 0.7);
+          --panel-border: rgba(255, 255, 255, 0.08);
+          --panel-shadow: 0 4px 14px rgba(0,0,0,.25);
+          --ring-track: #2a3547;
+          --ring-arc: #38bdf8;
+          --bar-bg: #2a3547;
+          --power-bg: rgba(56, 189, 248, 0.12);
+          --power-border: rgba(56, 189, 248, 0.25);
+          --power-color: #38bdf8;
+          --accent-blue: #38bdf8;
+        }
+
+        .wrap.light {
+          --card-bg: linear-gradient(180deg, #edf3fb 0%, #e4edf8 55%, #dfe9f6 100%);
+          --text-primary: #1c2733;
+          --text-secondary: #506173;
+          --text-muted: #8a95a3;
+          --icon-bg: #ffffff;
+          --icon-shadow: 0 3px 10px rgba(47,128,237,.18);
+          --btn-bg: rgba(255,255,255,.75);
+          --btn-border: #d8e0ea;
+          --btn-color: #7d8894;
+          --badge-idle-bg: #e3e8ee;
+          --badge-idle-text: #6b7684;
+          --badge-idle-dot: #9aa5b1;
+          --badge-run-bg: #d9f2e2;
+          --badge-run-text: #1c9a55;
+          --panel-bg: rgba(255,255,255,.72);
+          --panel-border: rgba(255,255,255,.9);
+          --panel-shadow: 0 2px 10px rgba(38,63,97,.05);
+          --ring-track: #dde5ee;
+          --ring-arc: #2f80ed;
+          --bar-bg: #e2e9f1;
+          --power-bg: rgba(47, 128, 237, 0.08);
+          --power-border: rgba(47, 128, 237, 0.15);
+          --power-color: #2f80ed;
+          --accent-blue: #2f80ed;
+        }
+
         ha-card {
           display: block;
           border-radius: 24px;
-          padding: 16px 16px 16px;
+          padding: 16px;
           overflow: hidden;
           position: relative;
-          background: linear-gradient(180deg, #edf3fb 0%, #e4edf8 55%, #dfe9f6 100%);
-          color: #1c2733;
+          background: var(--card-bg);
+          color: var(--text-primary);
           font-family: var(--paper-font-body1_-_font-family, inherit);
-          box-shadow: var(--ha-card-box-shadow, 0 6px 20px rgba(38, 63, 97, .10));
+          box-shadow: var(--ha-card-box-shadow, 0 6px 20px rgba(0, 0, 0, .12));
+          transition: background 0.3s ease, color 0.3s ease;
         }
+
         ha-card::before {
           content: ""; position: absolute; top: 0; left: 0; right: 0; height: 5px;
           background: linear-gradient(90deg, #2f80ed, #56a8ff);
@@ -325,23 +439,24 @@ class ApplianceCard extends HTMLElement {
         .header { display: flex; align-items: center; gap: 10px; }
         .h-icon {
           width: 44px; height: 44px; border-radius: 14px; flex-shrink: 0;
-          background: #fff; box-shadow: 0 3px 10px rgba(47,128,237,.18);
+          background: var(--icon-bg); box-shadow: var(--icon-shadow);
           display: flex; align-items: center; justify-content: center;
-          cursor: pointer;
+          cursor: pointer; transition: background 0.3s ease;
         }
         .h-title {
           font-size: 17.5px; font-weight: 700; letter-spacing: .2px;
-          flex: 0 1 auto; min-width: 56px;
+          flex: 0 1 auto; min-width: 56px; color: var(--text-primary);
           white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         }
         .badge {
           display: flex; align-items: center; gap: 7px; flex-shrink: 0;
           font-size: 11px; font-weight: 700; letter-spacing: .7px;
           padding: 6px 11px; border-radius: 999px;
-          background: #e3e8ee; color: #6b7684; white-space: nowrap;
+          background: var(--badge-idle-bg); color: var(--badge-idle-text); white-space: nowrap;
+          transition: background 0.3s ease, color 0.3s ease;
         }
-        .badge .b-dot { width: 7px; height: 7px; border-radius: 50%; background: #9aa5b1; }
-        .running .badge { background: #d9f2e2; color: #1c9a55; }
+        .badge .b-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--badge-idle-dot); }
+        .running .badge { background: var(--badge-run-bg); color: var(--badge-run-text); }
         .running .badge .b-dot { background: #22b263; animation: pulse 1.6s ease-in-out infinite; }
         @keyframes pulse {
           0%, 100% { box-shadow: 0 0 0 0 rgba(34,178,99,.45); }
@@ -350,9 +465,9 @@ class ApplianceCard extends HTMLElement {
         .h-spacer { flex: 1; }
         .h-btn {
           width: 35px; height: 35px; border-radius: 12px; flex-shrink: 0;
-          background: rgba(255,255,255,.75); border: 1px solid #d8e0ea;
+          background: var(--btn-bg); border: 1px solid var(--btn-border);
           display: flex; align-items: center; justify-content: center;
-          cursor: pointer; color: #7d8894; transition: transform .12s ease;
+          cursor: pointer; color: var(--btn-color); transition: transform .12s ease, background 0.3s ease;
         }
         .h-btn:active { transform: scale(.94); }
         .h-btn ha-icon { --mdc-icon-size: 19px; }
@@ -378,18 +493,18 @@ class ApplianceCard extends HTMLElement {
         }
 
         .panel {
-          background: rgba(255,255,255,.72);
-          border: 1px solid rgba(255,255,255,.9);
+          background: var(--panel-bg);
+          border: 1px solid var(--panel-border);
           border-radius: 18px; padding: 14px 16px; margin-top: 12px;
-          box-shadow: 0 2px 10px rgba(38,63,97,.05);
-          position: relative;
+          box-shadow: var(--panel-shadow);
+          position: relative; transition: background 0.3s ease, border-color 0.3s ease;
         }
 
         .status-panel { display: flex; align-items: center; gap: 16px; }
         .ring-box { position: relative; width: 92px; height: 92px; flex-shrink: 0; cursor: pointer; }
         .ring-box svg { width: 100%; height: 100%; }
-        .ring-track { stroke: #dde5ee; }
-        .ring-arc { stroke: #2f80ed; stroke-linecap: round; transition: stroke-dashoffset 0.5s ease; }
+        .ring-track { stroke: var(--ring-track); transition: stroke 0.3s ease; }
+        .ring-arc { stroke: var(--ring-arc); stroke-linecap: round; transition: stroke-dashoffset 0.5s ease, stroke 0.3s ease; }
         .ring-anim { transform-origin: 48px 48px; }
         .running .ring-anim { animation: spin 2.5s linear infinite; }
 
@@ -397,37 +512,37 @@ class ApplianceCard extends HTMLElement {
           position: absolute; inset: 0; display: flex; flex-direction: column;
           align-items: center; justify-content: center; text-align: center;
         }
-        .ring-time { font-size: 14.5px; font-weight: 800; line-height: 1.1; color: #1c2733; }
+        .ring-time { font-size: 14.5px; font-weight: 800; line-height: 1.1; color: var(--text-primary); }
         .ring-label {
-          font-size: 8px; font-weight: 700; letter-spacing: .8px; color: #8a95a3;
+          font-size: 8px; font-weight: 700; letter-spacing: .8px; color: var(--text-muted);
           margin-top: 3px; max-width: 65px; overflow: hidden; white-space: nowrap;
         }
 
         .st-col { flex: 1; min-width: 0; padding-right: 48px; }
-        .st-program { font-size: 16px; font-weight: 800; color: #1c2733; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .st-elapsed { font-size: 13px; color: #506173; font-weight: 600; margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .st-program { font-size: 16px; font-weight: 800; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .st-elapsed { font-size: 13px; color: var(--text-secondary); font-weight: 600; margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         
-        .bar { height: 8px; border-radius: 6px; background: #e2e9f1; margin-top: 10px; overflow: hidden; }
+        .bar { height: 8px; border-radius: 6px; background: var(--bar-bg); margin-top: 10px; overflow: hidden; transition: background 0.3s ease; }
         .bar-fill { height: 100%; border-radius: 6px; width: 0%; background: linear-gradient(90deg, #2f80ed, #56a8ff); transition: width .5s ease; }
 
         .power-badge {
           position: absolute; top: 14px; right: 16px;
           display: flex; align-items: center; gap: 4px;
-          font-size: 12px; font-weight: 800; color: #2f80ed;
-          background: rgba(47, 128, 237, 0.08); padding: 4px 8px;
-          border-radius: 8px; border: 1px solid rgba(47, 128, 237, 0.15);
-          cursor: pointer;
+          font-size: 12px; font-weight: 800; color: var(--power-color);
+          background: var(--power-bg); padding: 4px 8px;
+          border-radius: 8px; border: 1px solid var(--power-border);
+          cursor: pointer; transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
         }
-        .power-badge ha-icon { --mdc-icon-size: 14px; color: #2f80ed; }
+        .power-badge ha-icon { --mdc-icon-size: 14px; color: var(--power-color); }
         
-        .alert-box { padding: 12px; background: #fee2e2; color: #991b1b; border-radius: 12px; font-weight: 600; font-size: 13px; text-align: center; }
+        .alert-box { padding: 12px; background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.25); border-radius: 12px; font-weight: 600; font-size: 13px; text-align: center; }
       </style>
 
       <ha-card>
         <div class="wrap idle" id="wrap">
           <div class="header">
             <div class="h-icon" id="hIcon">
-              <ha-icon icon="${defaultIcon}" style="color: #2f80ed;"></ha-icon>
+              <ha-icon icon="${defaultIcon}" style="color: var(--accent-blue);"></ha-icon>
             </div>
             <div class="h-title" id="name">${c.name || defaultName}</div>
             <div class="badge"><span class="b-dot"></span><span id="badgeText"></span></div>
@@ -494,6 +609,11 @@ class ApplianceCard extends HTMLElement {
     const t = this._t;
     const wrap = root.getElementById("wrap");
     if (!wrap) return;
+
+    // Перевірка активної темної теми Home Assistant
+    const isDark = Boolean(this._hass?.themes?.darkMode);
+    wrap.classList.toggle("dark", isDark);
+    wrap.classList.toggle("light", !isDark);
 
     const mainContent = root.getElementById("mainContent");
     const alertBox = root.getElementById("alertBox");

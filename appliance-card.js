@@ -230,7 +230,7 @@ class ApplianceCard extends HTMLElement {
               <stop offset="1" stop-color="#1a252f"/>
             </linearGradient>
           </defs>
-          <ellipse cx="110" cy="222" rx="76" ry="8" fill="#000000" opacity=".15"/>
+          <ellipse cx="110" cy="222" rx="76" ry="8" fill="#000000" opacity=".25"/>
           <rect x="30" y="8" width="160" height="204" rx="18" fill="url(#dw-body)"/>
           <rect x="30" y="8" width="160" height="204" rx="18" fill="none" stroke="#a0abba" stroke-width="1.4"/>
           <rect x="48"  y="210" width="10" height="7" rx="3" fill="#64748b"/>
@@ -260,7 +260,7 @@ class ApplianceCard extends HTMLElement {
             <stop offset="1" stop-color="#090c12"/>
           </radialGradient>
         </defs>
-        <ellipse cx="110" cy="222" rx="76" ry="7" fill="#000000" opacity=".15"/>
+        <ellipse cx="110" cy="222" rx="76" ry="7" fill="#000000" opacity=".25"/>
         <rect x="44" y="216" width="12" height="6" rx="2" fill="#0f172a"/>
         <rect x="164" y="216" width="12" height="6" rx="2" fill="#0f172a"/>
         <rect x="30" y="8" width="160" height="210" rx="14" fill="#ffffff"/>
@@ -309,8 +309,17 @@ class ApplianceCard extends HTMLElement {
           display: block;
         }
 
-        /* СВІТЛА ТЕМА */
+        ha-card {
+          background: transparent !important;
+          border: none !important;
+          box-shadow: none !important;
+          padding: 0 !important;
+          display: block;
+        }
+
+        /* ОСНОВНА ОБОРУТКА КАРТКИ */
         .wrap {
+          /* СВІТЛА ТЕМА */
           --card-bg: #f0f4f9;
           --text-primary: #1e293b;
           --text-secondary: #475569;
@@ -337,11 +346,22 @@ class ApplianceCard extends HTMLElement {
           --accent-blue: #0284c7;
           --card-border: 1px solid #cbd5e1;
           --shadow-effect: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.08));
+
+          background: var(--card-bg);
+          color: var(--text-primary);
+          border-radius: 24px;
+          padding: 16px;
+          position: relative;
+          overflow: hidden;
+          border: var(--card-border);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+          transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+          font-family: var(--paper-font-body1_-_font-family, inherit);
         }
 
-        /* ТЕМНА ТЕМА (ОСВІТЛЕНИЙ ФОН ТА СВІТЛА ПАНЕЛЬ) */
+        /* ТЕМНА ТЕМА (ВИРАЗНИЙ СЛИТНО-СИНІЙ ФОН СЛИТНОГО КОЛЬОРУ) */
         .wrap.dark {
-          --card-bg: linear-gradient(180deg, #2b384e 0%, #1e2838 100%);
+          --card-bg: linear-gradient(180deg, #2d384d 0%, #1e2736 100%);
           --text-primary: #f8fafc;
           --text-secondary: #cbd5e1;
           --text-muted: #94a3b8;
@@ -355,9 +375,9 @@ class ApplianceCard extends HTMLElement {
           --badge-idle-dot: #94a3b8;
           --badge-run-bg: rgba(34, 197, 94, 0.25);
           --badge-run-text: #4ade80;
-          --panel-bg: rgba(255, 255, 255, 0.07);
+          --panel-bg: rgba(15, 23, 42, 0.55);
           --panel-border: rgba(255, 255, 255, 0.15);
-          --panel-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+          --panel-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
           --ring-track: rgba(255, 255, 255, 0.15);
           --ring-arc: #38bdf8;
           --bar-bg: rgba(255, 255, 255, 0.15);
@@ -365,25 +385,11 @@ class ApplianceCard extends HTMLElement {
           --power-border: rgba(56, 189, 248, 0.4);
           --power-color: #38bdf8;
           --accent-blue: #38bdf8;
-          --card-border: 1px solid rgba(255, 255, 255, 0.16);
+          --card-border: 1px solid rgba(255, 255, 255, 0.18);
           --shadow-effect: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.35));
         }
 
-        ha-card {
-          display: block;
-          border-radius: 24px;
-          padding: 16px;
-          overflow: hidden;
-          position: relative;
-          background: var(--card-bg);
-          color: var(--text-primary);
-          font-family: var(--paper-font-body1_-_font-family, inherit);
-          box-shadow: var(--ha-card-box-shadow, 0 6px 20px rgba(0, 0, 0, .12));
-          border: var(--card-border);
-          transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-        }
-
-        ha-card::before {
+        .wrap::before {
           content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px;
           background: linear-gradient(90deg, #38bdf8, #818cf8);
         }

@@ -309,22 +309,14 @@ class ApplianceCard extends HTMLElement {
           display: block;
         }
 
-        ha-card {
-          display: block;
-          border-radius: 24px;
-          padding: 16px;
-          overflow: hidden;
-          position: relative;
-          font-family: var(--paper-font-body1_-_font-family, inherit);
-          transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-
-          /* СВІТЛА ТЕМА ЗА ЗАМОВЧУВАННЯМ */
+        /* СВІТЛА ТЕМА */
+        .wrap {
           --card-bg: #f0f4f9;
           --text-primary: #1e293b;
           --text-secondary: #475569;
           --text-muted: #64748b;
           --icon-bg: #ffffff;
-          --icon-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+          --icon-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
           --btn-bg: #ffffff;
           --btn-border: #cbd5e1;
           --btn-color: #475569;
@@ -345,41 +337,50 @@ class ApplianceCard extends HTMLElement {
           --accent-blue: #0284c7;
           --card-border: 1px solid #cbd5e1;
           --shadow-effect: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.08));
-
-          background: var(--card-bg) !important;
-          color: var(--text-primary);
-          border: var(--card-border) !important;
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
         }
 
-        /* ТЕМНА ТЕМА (ВИРАЗНЕ СІРО-СИНЄ ТЛО) */
-        ha-card.dark {
-          --card-bg: linear-gradient(180deg, #2a3447 0%, #1e2636 100%);
-          --text-primary: #ffffff;
+        /* ТЕМНА ТЕМА (ОСВІТЛЕНИЙ ФОН ТА СВІТЛА ПАНЕЛЬ) */
+        .wrap.dark {
+          --card-bg: linear-gradient(180deg, #2b384e 0%, #1e2838 100%);
+          --text-primary: #f8fafc;
           --text-secondary: #cbd5e1;
           --text-muted: #94a3b8;
-          --icon-bg: #37455d;
-          --icon-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-          --btn-bg: rgba(255, 255, 255, 0.12);
-          --btn-border: rgba(255, 255, 255, 0.2);
+          --icon-bg: rgba(255, 255, 255, 0.1);
+          --icon-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+          --btn-bg: rgba(255, 255, 255, 0.1);
+          --btn-border: rgba(255, 255, 255, 0.18);
           --btn-color: #f1f5f9;
-          --badge-idle-bg: rgba(255, 255, 255, 0.15);
+          --badge-idle-bg: rgba(255, 255, 255, 0.12);
           --badge-idle-text: #e2e8f0;
           --badge-idle-dot: #94a3b8;
-          --badge-run-bg: rgba(34, 197, 94, 0.3);
+          --badge-run-bg: rgba(34, 197, 94, 0.25);
           --badge-run-text: #4ade80;
-          --panel-bg: #141c2b;
-          --panel-border: rgba(255, 255, 255, 0.18);
-          --panel-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+          --panel-bg: rgba(255, 255, 255, 0.07);
+          --panel-border: rgba(255, 255, 255, 0.15);
+          --panel-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
           --ring-track: rgba(255, 255, 255, 0.15);
           --ring-arc: #38bdf8;
           --bar-bg: rgba(255, 255, 255, 0.15);
-          --power-bg: rgba(56, 189, 248, 0.22);
+          --power-bg: rgba(56, 189, 248, 0.2);
           --power-border: rgba(56, 189, 248, 0.4);
           --power-color: #38bdf8;
           --accent-blue: #38bdf8;
-          --card-border: 1px solid rgba(255, 255, 255, 0.18);
-          --shadow-effect: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.5));
+          --card-border: 1px solid rgba(255, 255, 255, 0.16);
+          --shadow-effect: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.35));
+        }
+
+        ha-card {
+          display: block;
+          border-radius: 24px;
+          padding: 16px;
+          overflow: hidden;
+          position: relative;
+          background: var(--card-bg);
+          color: var(--text-primary);
+          font-family: var(--paper-font-body1_-_font-family, inherit);
+          box-shadow: var(--ha-card-box-shadow, 0 6px 20px rgba(0, 0, 0, .12));
+          border: var(--card-border);
+          transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
 
         ha-card::before {
@@ -408,8 +409,8 @@ class ApplianceCard extends HTMLElement {
           transition: background 0.3s ease, color 0.3s ease;
         }
         .badge .b-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--badge-idle-dot); }
-        ha-card.running .badge { background: var(--badge-run-bg); color: var(--badge-run-text); border-color: rgba(74, 222, 128, 0.3); }
-        ha-card.running .badge .b-dot { background: #4ade80; animation: pulse 1.6s ease-in-out infinite; }
+        .running .badge { background: var(--badge-run-bg); color: var(--badge-run-text); border-color: rgba(74, 222, 128, 0.3); }
+        .running .badge .b-dot { background: #4ade80; animation: pulse 1.6s ease-in-out infinite; }
         @keyframes pulse {
           0%, 100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.45); }
           50%      { box-shadow: 0 0 0 5px rgba(74, 222, 128, 0); }
@@ -430,9 +431,9 @@ class ApplianceCard extends HTMLElement {
         .arcs    { transform-origin: 110px 136px; }
         .water-jets { transform-origin: 110px 128px; }
 
-        ha-card.running .arcs { animation: spin 3s linear infinite; }
-        ha-card.running .laundry { animation: tumble 3s ease-in-out infinite; }
-        ha-card.running .water-jets { animation: spray 2s ease-in-out infinite alternate; }
+        .running .arcs { animation: spin 3s linear infinite; }
+        .running .laundry { animation: tumble 3s ease-in-out infinite; }
+        .running .water-jets { animation: spray 2s ease-in-out infinite alternate; }
 
         @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes tumble {
@@ -459,7 +460,7 @@ class ApplianceCard extends HTMLElement {
         .ring-track { stroke: var(--ring-track); transition: stroke 0.3s ease; }
         .ring-arc { stroke: var(--ring-arc); stroke-linecap: round; transition: stroke-dashoffset 0.5s ease, stroke 0.3s ease; }
         .ring-anim { transform-origin: 48px 48px; }
-        ha-card.running .ring-anim { animation: spin 2.5s linear infinite; }
+        .running .ring-anim { animation: spin 2.5s linear infinite; }
 
         .ring-center {
           position: absolute; inset: 0; display: flex; flex-direction: column;
@@ -491,53 +492,56 @@ class ApplianceCard extends HTMLElement {
         .alert-box { padding: 12px; background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 12px; font-weight: 600; font-size: 13px; text-align: center; }
       </style>
 
-      <ha-card id="mainCard">
-        <div class="header">
-          <div class="h-icon" id="hIcon">
-            <ha-icon icon="${defaultIcon}" style="color: var(--accent-blue);"></ha-icon>
-          </div>
-          <div class="h-title" id="name">${c.name || defaultName}</div>
-          <div class="badge"><span class="b-dot"></span><span id="badgeText"></span></div>
-          <div class="h-spacer"></div>
-          <div class="h-btn" id="chartBtn" title="${t.tip_history}">
-            <ha-icon icon="mdi:chart-bar"></ha-icon>
-          </div>
-        </div>
-
-        <div class="hero">
-          ${this._getApplianceSVG(c.appliance_type)}
-        </div>
-
-        <div id="mainContent">
-          <div class="panel status-panel">
-            <div class="power-badge" id="powerBadge" title="${t.power}">
-              <ha-icon icon="mdi:flash"></ha-icon>
-              <span id="powerVal">0 Вт</span>
+      <ha-card>
+        <div class="wrap" id="wrap">
+          <div class="header">
+            <div class="h-icon" id="hIcon">
+              <ha-icon icon="${defaultIcon}" style="color: var(--accent-blue);"></ha-icon>
             </div>
+            <div class="h-title" id="name">${c.name || defaultName}</div>
+            <div class="badge"><span class="b-dot"></span><span id="badgeText"></span></div>
+            <div class="h-spacer"></div>
+            <div class="h-btn" id="chartBtn" title="${t.tip_history}">
+              <ha-icon icon="mdi:chart-bar"></ha-icon>
+            </div>
+          </div>
 
-            <div class="ring-box" id="ringBox">
-              <svg viewBox="0 0 96 96">
-                <circle class="ring-track" cx="48" cy="48" r="39" fill="none" stroke-width="8"/>
-                <g class="ring-anim">
-                  <circle class="ring-arc" id="ringArc" cx="48" cy="48" r="39" fill="none"
-                          stroke-width="8" stroke-dasharray="245" stroke-dashoffset="245" transform="rotate(-90 48 48)"/>
-                </g>
-              </svg>
-              <div class="ring-center">
-                <div class="ring-time" id="ringTime">---</div>
-                <div class="ring-label" id="ringLabel"></div>
+          <div class="hero">
+            ${this._getApplianceSVG(c.appliance_type)}
+          </div>
+
+          <div id="mainContent">
+            <div class="panel status-panel">
+              <div class="power-badge" id="powerBadge" title="${t.power}">
+                <ha-icon icon="mdi:flash"></ha-icon>
+                <span id="powerVal">0 Вт</span>
+              </div>
+
+              <div class="ring-box" id="ringBox">
+                <svg viewBox="0 0 96 96">
+                  <circle class="ring-track" cx="48" cy="48" r="39" fill="none" stroke-width="8"/>
+                  <g class="ring-anim">
+                    <circle class="ring-arc" id="ringArc" cx="48" cy="48" r="39" fill="none"
+                            stroke-width="8" stroke-dasharray="245" stroke-dashoffset="245" transform="rotate(-90 48 48)"/>
+                  </g>
+                </svg>
+                <div class="ring-center">
+                  <div class="ring-time" id="ringTime">---</div>
+                  <div class="ring-label" id="ringLabel"></div>
+                </div>
+              </div>
+
+              <div class="st-col">
+                <div class="st-program" id="stProgram">---</div>
+                <div class="st-elapsed" id="stElapsed" style="display: none;"></div>
+                <div class="bar" id="bar"><div class="bar-fill" id="barFill"></div></div>
               </div>
             </div>
-
-            <div class="st-col">
-              <div class="st-program" id="stProgram">---</div>
-              <div class="st-elapsed" id="stElapsed" style="display: none;"></div>
-              <div class="bar" id="bar"><div class="bar-fill" id="barFill"></div></div>
-            </div>
           </div>
-        </div>
 
-        <div id="alertBox" class="alert-box" style="display: none; margin-top: 12px;">${t.need_entity}</div>
+          <div id="alertBox" class="alert-box" style="display: none; margin-top: 12px;">${t.need_entity}</div>
+
+        </div>
       </ha-card>
     `;
 
@@ -573,11 +577,11 @@ class ApplianceCard extends HTMLElement {
 
     const c = this._config;
     const t = this._t;
-    const card = root.getElementById("mainCard");
-    if (!card) return;
+    const wrap = root.getElementById("wrap");
+    if (!wrap) return;
 
     const isDark = this._isDarkMode();
-    card.classList.toggle("dark", isDark);
+    wrap.classList.toggle("dark", isDark);
 
     const mainContent = root.getElementById("mainContent");
     const alertBox = root.getElementById("alertBox");
@@ -592,8 +596,8 @@ class ApplianceCard extends HTMLElement {
     }
 
     const running = this._isRunning();
-    card.classList.toggle("running", running);
-    card.classList.toggle("idle", !running);
+    wrap.classList.toggle("running", running);
+    wrap.classList.toggle("idle", !running);
 
     const isDw = c.appliance_type === "dishwasher";
     const nameEl = root.getElementById("name");

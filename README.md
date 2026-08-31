@@ -27,8 +27,8 @@
 
 1. Відкрийте **HACS** ➔ **Frontend**.
 2. Натисніть три крапки у правому верхньому кутку ➔ **Custom repositories**.
-3. Додайте посилання: `[https://github.com/WildeRNS/appliance-card](https://github.com/WildeRNS/appliance-card)`.
-4. Оберіть тип **Lovelace**.
+3. Додайте посилання: `(https://github.com/WildeRNS/appliance-card)`.
+4. Оберіть тип **Dashboard**.
 5. Натисніть **Завантажити** (Download) та оновіть сторінку.
 
 ---
@@ -62,6 +62,7 @@ power_entity: sensor.washing_machine_power
 | `power_entity` | `string` | Ні | Сенсор споживання потужності (Вт) |
 
 ---
+Оригінальна ідея взатя тут: https://github.com/sionetta/wm_animated_ha_card
 
 ## 📄 Ліцензія
 
